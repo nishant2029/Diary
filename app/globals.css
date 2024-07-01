@@ -1,0 +1,338 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} 
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+.rainbow-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-style: italic;
+  font-weight: bold;
+  border: 2px solid transparent; /* Transparent border initially */
+  border-radius: 999px;
+  cursor: pointer;
+  overflow: hidden;
+  background-color: transparent; /* Transparent background */
+  color: rgba(14, 8, 11, 0.8); /* Dark text color for contrast */
+  text-shadow: 0 0 5px rgba(145, 128, 128, 0.8); /* White shadow to enhance text visibility */
+  transition: border-color 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.rainbow-button::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 2px solid;
+  border-image-slice: 1;
+  border-width: 2px;
+  border-image-source: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  z-index: -1;
+  border-radius: 999px;
+  transition: opacity 0.3s ease;
+}
+
+.rainbow-button:hover::before {
+  opacity: 0;
+}
+
+/* Animation for text color */
+@keyframes rainbow {
+  0% { color: red; }
+  14% { color: orange; }
+  28% { color: yellow; }
+  42% { color: green; }
+  57% { color: blue; }
+  71% { color: indigo; }
+  85% { color: violet; }
+  100% { color: red; }
+}
+
+.rainbow-button:hover {
+  border-color: transparent; /* Hide border on hover */
+  color: rgba(0, 0, 0, 0.8); /* Dark text color for contrast */
+  animation: rainbow 3s infinite; /* Apply rainbow animation on hover */
+  text-shadow: none; /* Remove text shadow on hover */
+}
+
+
+
+html {
+  height: 100%; /* Ensure html element takes the full viewport height */
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh; /* Minimum full viewport height */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+  padding: 10px; /* Padding of 10 pixels */
+  flex-direction: column; /* Vertical layout by default */
+
+  /* Responsive layout for larger screens */
+  @media (min-width: 1024px) {
+    justify-content: flex-start; /* Align items to the start (left) */
+    padding-left: 20px; /* Increased left padding for larger screens */
+    flex-direction: row; /* Horizontal layout */
+  }
+
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    padding: 20px; /* Increased padding for smaller screens */
+  }
+
+  /* Further adjustments for very small screens like phones */
+  @media (max-width: 480px) {
+    padding: 15px; /* Adjusted padding for very small screens */
+    justify-content: center; /* Center items horizontally */
+    align-items: flex-start; /* Align items to the start (top) */
+    flex-direction: column; /* Vertical layout */
+  }
+}
+
+
+
+.homepagecss {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: url('/image.png') no-repeat;
+  background-position: 30% 45%;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: auto;
+  margin: 0;
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-start-rgb));
+
+  /* Responsive adjustments for smaller screens (mobile) */
+  @media (max-width: 768px) {
+    background-position: 30% 100%; /* Adjust background position for better display */
+  }
+
+  /* Responsive adjustments for larger screens (laptop and desktop) */
+  @media (min-width: 1024px) {
+    background-position: 30% 35%; /* Maintain background position for larger screens */
+  }
+}
+
+.contact-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: url('/contact.jpg') no-repeat;
+  background-position: 30% 45%;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: auto;
+  margin: 0;
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-start-rgb));
+
+  /* Responsive adjustments for smaller screens (mobile) */
+  @media (max-width: 768px) {
+    background-position: 30% 200%; /* Adjust background position for better display */
+  }
+
+  /* Responsive adjustments for larger screens (laptop and desktop) */
+  @media (min-width: 1024px) {
+    background-position: 30% 35%; /* Maintain background position for larger screens */
+  }
+}
+.wishes-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: url('/wishes.jpg') no-repeat;
+  background-position: 30% 45%;
+  background-attachment: fixed;
+  background-size: cover;
+  overflow: auto;
+  margin: 0;
+  color: rgb(var(--foreground-rgb));
+  background-color: rgb(var(--background-start-rgb));
+
+  /* Responsive adjustments for smaller screens (mobile) */
+  @media (max-width: 768px) {
+    background-position: 30% 200%; /* Adjust background position for better display */
+  }
+
+  /* Responsive adjustments for larger screens (laptop and desktop) */
+  @media (min-width: 1024px) {
+    background-position: 30% 35%; /* Maintain background position for larger screens */
+  }
+}
+/* Styles for the entire page */
+.about-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Ensure full viewport height */
+  background: url('/sky.jpg') no-repeat; /* Background image */
+  background-position: 30% 45%; /* Initial background position */
+  background-attachment: fixed; /* Fixed background */
+  background-size: cover; /* Cover the entire container */
+  overflow: auto; /* Allow scrolling if content exceeds */
+  margin: 0;
+  color: #ffffff; /* Text color */
+  font-family: 'Arial', sans-serif; /* Font family */
+  font-size: 1.2rem; /* Base font size */
+  line-height: 1.6; /* Line height for better readability */
+  padding: 20px; /* Padding for the entire page */
+}
+
+/* Responsive adjustments for smaller screens (mobile) */
+@media (max-width: 768px) {
+  .about-page {
+    background-position: 30% 200%; /* Adjusted background position */
+  }
+}
+
+/* Responsive adjustments for larger screens (laptop and desktop) */
+@media (min-width: 1024px) {
+  .about-page {
+    background-position: 30% 35%; /* Maintain background position */
+  }
+}
+
+/* Stylish heading style */
+.stylish-heading {
+  color: #ee0dee; /* Heading text color */
+  font-weight: bold; /* Bold font weight */
+  font-size: 3em; /* Larger font size */
+  font-family: 'Brush Script MT', 'Cursive', 'Arial', sans-serif; /* Cursive font */
+  text-shadow: 2px 2px 4px #aaa; /* Text shadow for effect */
+  position: relative; /* Fixed position at the top */
+  top: 20px; /* Space from the top */
+  width: 100%; /* Full width */
+  text-align: center; /* Center align text */
+  background-color: transparent; /* Semi-transparent background */
+  padding: 10px 0; /* Padding top and bottom */
+  z-index: 1; /*Ensure it stays on top of other elements*/
+}
+
+/* Content paragraph style */
+.about p {
+  color: #ffffff; /* Paragraph text color */
+  font-size: 1.2rem; /* Font size */
+  font-style: italic; /* Italic text style */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Text shadow for effect */
+  margin: 20px auto; /* Margin for better spacing */
+  max-width: 800px; /* Maximum width for content */
+  padding: 70px; /* Padding inside */
+  background-color: rgba(90, 88, 88, 0.7); /* Semi-transparent background */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
+}
+
+/* Adjustments for smaller screens (mobile) */
+@media (max-width: 768px) {
+  .stylish-heading {
+    font-size: 2.5em; /* Reduced heading size for smaller screens */
+    top: 10px; /* Adjusted top position */
+    padding: 8px 0; /* Reduced padding for heading */
+  }
+  
+  .about p {
+    font-size: 1rem; /* Reduced font size for paragraphs */
+    margin: 10px auto; /* Adjusted margin for smaller screens */
+    padding: 10px; /* Reduced padding for paragraphs */
+  }
+}
+.form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.form-popup {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-popup form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-popup label {
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.form-popup input {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.form-popup button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #5746f0;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.form-popup button:hover {
+  background-color: #4638c7;
+}
+
+
+
+
+
