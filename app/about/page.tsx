@@ -1,25 +1,20 @@
+// app/about/page.tsx
 "use client"
 import React, { useState, useEffect } from 'react';
-import FormPopup from '@/components/formpop'; // Adjust the import path based on your project structure
+import FormPopup from '@/components/formpop';
 
 const Page: React.FC = () => {
   const [showForm, setShowForm] = useState<boolean>(false);
   const [aboutContent, setAboutContent] = useState<string>('');
 
-  // Load content from localStorage when the component mounts
+  // Fetch content from the database
   useEffect(() => {
-    const savedContent = localStorage.getItem('aboutContent');
-    if (savedContent) {
-      setAboutContent(savedContent);
-    } else {
-      setAboutContent(`
-        Hi, I'm Arohi, but most people call me Pari. I'm 14 years old and currently in the 8th standard at Kendriya Vidyalaya Maithon. I live in Maithon with my wonderful family.
-
-        I have a lovely elder sister named Antra Yadav. My mother's name is Shila Rani, and she is incredibly caring. My father's name is Ashok Yadav, and he is very supportive. Although we live in Maithon, our hometown is Siwan in Bihar, which holds a special place in our hearts.
-
-        At school, I enjoy my studies and take part in various activities. I love learning new things and spending time with my family. My nickname, Pari, means "fairy" in Hindi, and I think it suits me because I always try to bring a bit of magic and positivity into everything I do!
-      `);
-    }
+    const fetchContent = async () => {
+      const response = await fetch('/api/about/getContent');
+      const data = await response.json();
+      setAboutContent(data?.content || '');
+    };
+    fetchContent();
   }, []);
 
   const handleAddMoreAbout = () => {
@@ -30,11 +25,18 @@ const Page: React.FC = () => {
     setShowForm(false);
   };
 
-  const handleSubmitForm = (inputText: string) => {
-    // Append inputText to existing aboutContent and save to localStorage
+  const handleSubmitForm = async (inputText: string) => {
+    // Update content in the database
     const newAboutContent = `${aboutContent}\n\n${inputText}`;
-    setAboutContent(newAboutContent);
-    localStorage.setItem('aboutContent', newAboutContent);
+    const response = await fetch('/api/about/updateContent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: newAboutContent }),
+    });
+
+    if (response.ok) {
+      setAboutContent(newAboutContent);
+    }
   };
 
   return (

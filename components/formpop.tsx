@@ -1,4 +1,5 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+// components/formpopup.tsx
+import React, { useState } from 'react';
 
 interface FormPopupProps {
   onClose: () => void;
@@ -6,37 +7,22 @@ interface FormPopupProps {
 }
 
 const FormPopup: React.FC<FormPopupProps> = ({ onClose, onSubmit }) => {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputText, setInputText] = useState<string>('');
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (inputValue.trim() === '') {
-      alert('Please enter something before submitting.');
-      return;
-    }
-    onSubmit(inputValue); // Pass inputValue to parent component
-    setInputValue(''); // Reset input field
-    onClose(); // Close the form popup
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await onSubmit(inputText);
+    onClose();
   };
 
   return (
     <div className="form-popup">
       <form onSubmit={handleSubmit}>
         <label>
-          Enter additional information:
-          <input
-            type="text"
-            value={inputValue}
-            onChange={handleChange}
-            placeholder="Type something..."
-            required
-          />
+        <textarea placeholder="Add Information..." value={inputText} onChange={(e) => setInputText(e.target.value)} />
         </label>
         <button type="submit">Submit</button>
+        <button type="button" onClick={onClose}>Close</button>
       </form>
     </div>
   );

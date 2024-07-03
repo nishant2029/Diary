@@ -292,10 +292,10 @@ html {
 }
 
 .form-popup {
-  background-color: #242121;
+  background-color: transparent;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(243, 238, 238, 0.2);
 }
 
 .form-popup form {
@@ -309,13 +309,15 @@ html {
   margin-bottom: 10px;
 }
 
-.form-popup input {
+.form-popup textarea {
   padding: 8px;
   margin-top: 5px;
   border: 1px solid #181717;
   border-radius: 4px;
   font-size: 1rem;
+  color: black; /* Added this line to set text color to black */
 }
+
 
 .form-popup button {
   padding: 10px 20px;
