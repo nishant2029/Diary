@@ -1,12 +1,13 @@
 // pages/api/contacts.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 // import Contact from '@/models/Contact';
 import Wish from '@/models/Wishes';
+import connectToDatabase from '@/lib/mongodb';
 
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-    await mongoose.connect(process.env.MONGODB_URI!, {});
+    await connectToDatabase();
 
     if (req.method === 'GET') {
         try {
